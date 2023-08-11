@@ -49,6 +49,7 @@ function AllCandies() {
         <Spinner />
       ) : candyToggle ? (
         <div className="container mt-5 mb-5">
+          <h3>Number of Candies: {candyArray.length}</h3>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {candyArray.map((item) => {
               return (
