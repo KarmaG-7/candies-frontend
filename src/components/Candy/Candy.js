@@ -5,7 +5,6 @@ import Spinner from "../Spinner/Spinner";
 import "./Candy.css";
 
 function Candy() {
-  const url = process.env.REACT_APP_API_URL;
   const { id } = useParams();
   const navigate = useNavigate();
   const [candy, setCandy] = useState(null);
@@ -14,7 +13,12 @@ function Candy() {
   async function getCandyById() {
     setIsLoading(true);
     try {
-      let result = await axios.get(`${url}/candies/${id}`);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? `https://candies-backend.onrender.com/candies/${id}`
+          : `http://localhost:3001/candies/${id}`;
+
+      let result = await axios.get(url);
       console.log(result.data);
       setCandy(result.data);
       setIsLoading(false);
@@ -30,7 +34,12 @@ function Candy() {
 
   async function handleDelete() {
     try {
-      await axios.delete(`${url}/candies/${id}`);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? `https://candies-backend.onrender.com/candies/${id}`
+          : `http://localhost:3001/candies/${id}`;
+
+      await axios.delete(url);
       alert("This candy has been deleted 🚮");
       navigate("/candies");
     } catch (e) {

@@ -5,8 +5,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./EditCandy.css";
 
 function EditCandy() {
-  let url = process.env.REACT_APP_API_URL;
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -22,7 +20,13 @@ function EditCandy() {
 
   async function fetchCandyData() {
     try {
-      let result = await axios.get(`${url}/candies/${id}`);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? `https://candies-backend.onrender.com/candies/${id}`
+          : `http://localhost:3001/candies/${id}`;
+
+      let result = await axios.get(url);
+
       setSelectedCandy(result.data);
     } catch (e) {
       console.log(e);
@@ -57,23 +61,16 @@ function EditCandy() {
     });
   }
 
-  // function convertToNumber(){
-  //     let convertedPrice = Number(selectedCandy.price);
-  //     let convertedRating = Number(selectedCandy.rating);
-
-  //     setSelectedCandy({
-  //         ...selectedCandy,
-  //         price: convertedPrice,
-  //         rating: convertedRating,
-  //     })
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault();
-    // convertToNumber();
 
     try {
-      await axios.put(`${url}/candies/${id}`, selectedCandy);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? `https://candies-backend.onrender.com/candies/${id}`
+          : `http://localhost:3001/candies/${id}`;
+
+      await axios.put(url, selectedCandy);
       alert("You've successfully updated this candy! 😱");
       navigate(`/candies/${id}`);
     } catch (e) {

@@ -5,7 +5,6 @@ import Spinner from "../Spinner/Spinner";
 import "./AllCandies.css";
 
 function AllCandies() {
-  let url = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const [candyArray, setCandyArray] = useState([]);
@@ -15,7 +14,12 @@ function AllCandies() {
   async function getCandyData() {
     setIsLoading(true);
     try {
-      let result = await axios.get(`${url}/candies`);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? "https://candies-backend.onrender.com/candies"
+          : "http://localhost:3001/candies";
+
+      let result = await axios.get(`${url}`);
       setCandyArray(result.data);
       setIsLoading(false);
     } catch (error) {

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "./NewCandyForm.css";
 
 function NewCandyForm() {
-  let url = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
 
   const [newCandy, setNewCandy] = useState({
@@ -45,7 +44,12 @@ function NewCandyForm() {
     e.preventDefault();
 
     try {
-      await axios.post(`${url}/candies`, newCandy);
+      let url =
+        process.env.NODE_ENV === "production"
+          ? "https://candies-backend.onrender.com/candies"
+          : "http://localhost:3001/candies";
+
+      await axios.post(url, newCandy);
       alert(
         "You've created your candy! 🎉 We're redirecting you back to the list of candies."
       );
