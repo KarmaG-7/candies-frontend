@@ -33,17 +33,22 @@ function Candy() {
   }, []);
 
   async function handleDelete() {
-    try {
-      let url =
-        process.env.NODE_ENV === "production"
-          ? `https://candies-backend.onrender.com/candies/${id}`
-          : `http://localhost:3001/candies/${id}`;
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this candy?"
+    );
+    if (confirmDelete) {
+      try {
+        let url =
+          process.env.NODE_ENV === "production"
+            ? `https://candies-backend.onrender.com/candies/${id}`
+            : `http://localhost:3001/candies/${id}`;
 
-      await axios.delete(url);
-      alert("This candy has been deleted 🚮");
-      navigate("/candies");
-    } catch (e) {
-      console.log(e);
+        await axios.delete(url);
+        alert("This candy has been deleted 🚮");
+        navigate("/candies");
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
   return (
