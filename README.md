@@ -13,3 +13,11 @@ CandyLand App is a delightful platform that brings together candy lovers to expl
 **Candy Details:** Get in-depth information about each candy, including its name, type, price, rating, and more.
 
 Indulge your sweet tooth and start your candy adventure with CandyLand App today. Happy candy hunting! :candy::lollipop:
+
+## Backend Link
+
+https://candies-backend.onrender.com
+
+## Frontend Link
+
+https://github.com/KarmaG-7/candies-frontend
