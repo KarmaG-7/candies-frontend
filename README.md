@@ -20,4 +20,4 @@ https://candies-backend.onrender.com
 
 ## Frontend Link
 
-https://github.com/KarmaG-7/candies-frontend
+https://main--fancy-chebakia-fe2f99.netlify.app/
